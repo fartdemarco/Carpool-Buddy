@@ -1,4 +1,4 @@
-package com.example.carpoolbuddy.ui;
+package com.example.carpoolbuddy.Models;
 
 public class User {
     private String uid;
@@ -33,6 +33,15 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
     public void setEmail(String email) {

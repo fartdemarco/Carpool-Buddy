@@ -11,7 +11,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_vehicles_info.xml" value="0.12135416666666667" />
+        <entry key="app/src/main/res/layout/activity_vehicle_display.xml" value="0.12291666666666666" />
+        <entry key="app/src/main/res/layout/activity_vehicles_info.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/row_view.xml" value="0.5" />
       </map>
     </option>
   </component>

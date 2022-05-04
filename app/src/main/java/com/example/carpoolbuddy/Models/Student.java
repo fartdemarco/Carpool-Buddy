@@ -1,6 +1,6 @@
-package com.example.carpoolbuddy;
+package com.example.carpoolbuddy.Models;
 
-import com.example.carpoolbuddy.ui.User;
+import com.example.carpoolbuddy.Models.User;
 
 public class Student extends User {
     private int gradeLevel;

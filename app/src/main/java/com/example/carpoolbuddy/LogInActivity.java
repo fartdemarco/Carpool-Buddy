@@ -57,33 +57,27 @@ public class LogInActivity extends AppCompatActivity implements AdapterView.OnIt
         String password = this.password.getText().toString();
         System.out.println(email+" "+password);
 
-    }
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("SIGN IN", "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("SIGN IN", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LogInActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
 
-//    public void signUp(View v)
-//    {
-//        System.out.println("sign up");
-//        String email = this.email.getText().toString();
-//        String password = this.password.getText().toString();
-//
-//        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                if(task.isSuccessful())
-//                {
-//                    Log.d("Sign up", "Succesfully signed up the user");
-//
-//                    FirebaseUser user = mAuth.getCurrentUser();
-//                    updateUI(user);
-//                } else
-//                {
-//                    Log.w("Sign up", "createUserWithEmail:failure", task.getException());
-//
-//                    updateUI(null);
-//                }
-//            }
-//
-//        });
-//    }
+
+    }
 
     public void signUp2(View v)
     {

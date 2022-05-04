@@ -1,6 +1,4 @@
-package com.example.carpoolbuddy;
-
-import com.example.carpoolbuddy.ui.User;
+package com.example.carpoolbuddy.Models;
 
 public class Alumni extends User {
 

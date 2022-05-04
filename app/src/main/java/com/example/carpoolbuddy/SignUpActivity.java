@@ -9,17 +9,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.carpoolbuddy.Models.Alumni;
+import com.example.carpoolbuddy.Models.Parent;
+import com.example.carpoolbuddy.Models.Student;
+import com.example.carpoolbuddy.Models.Teacher;
+import com.example.carpoolbuddy.Models.User;
+import com.example.carpoolbuddy.Models.Vehicle;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -35,8 +41,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText subjectField;
     private Spinner userRoleSpinner;
     private String selectedRole;
-    private String uid;
-    private static int uidGenerator = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +51,6 @@ public class SignUpActivity extends AppCompatActivity {
         layout = findViewById(R.id.linearLayout1);
         userRoleSpinner = findViewById(R.id.spinner1);
         setupSpinner();
-        uid = "" + uidGenerator;
-        uidGenerator++;
     }
 
     private void setupSpinner() {
@@ -108,6 +110,11 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void signUp(View v) {
+        //generate + get new key
+        DocumentReference newRideRef = firestore.collection("people").document();
+        String uid = newRideRef.getId();
+
+
         String nameString = nameField.getText().toString();
         String emailString = emailField.getText().toString();
         String passwordString = passwordField.getText().toString();
@@ -130,24 +137,20 @@ public class SignUpActivity extends AppCompatActivity {
         if(selectedRole.equals("Alumni")) {
             int gradYearInt = Integer.parseInt(gradYearField.getText().toString());
             Alumni newUser = new Alumni(uid, nameString, emailString, gradYearInt);
-            uidGenerator++;
             firestore.collection("people/peopledoc/alumni").document(uid).set(newUser);
         }
         if(selectedRole.equals("Student")) {
             int gradeLevelInt = Integer.parseInt(gradeLevelField.getText().toString());
             Student newUser = new Student(uid, nameString, emailString, gradeLevelInt);
-            uidGenerator++;
             firestore.collection("people/peopledoc/student").document(uid).set(newUser);
         }
         if(selectedRole.equals("Teacher")) {
             String subject = subjectField.getText().toString();
             Teacher newUser = new Teacher(uid, nameString, emailString, subject);
-            uidGenerator++;
             firestore.collection("people/peopledoc/teacher").document(uid).set(newUser);
         }
         if(selectedRole.equals("Parent")) {
             Parent newUser = new Parent(uid, nameString, emailString);
-            uidGenerator++;
             firestore.collection("people/peopledoc/alumni").document(uid).set(newUser);
         }
         updateUI(mAuth.getCurrentUser());
