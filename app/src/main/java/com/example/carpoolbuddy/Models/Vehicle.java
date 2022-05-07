@@ -1,6 +1,9 @@
 package com.example.carpoolbuddy.Models;
 
-public class Vehicle {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Vehicle implements Parcelable {
     private String owner;
     private String model;
     private int maxCapacity;
@@ -20,6 +23,27 @@ public class Vehicle {
         this.basePrice = basePrice;
         open = true;
     }
+
+    protected Vehicle(Parcel in) {
+        owner = in.readString();
+        model = in.readString();
+        maxCapacity = in.readInt();
+        id = in.readString();
+        basePrice = in.readDouble();
+        open = in.readByte() != 0;
+    }
+
+    public static final Creator<Vehicle> CREATOR = new Creator<Vehicle>() {
+        @Override
+        public Vehicle createFromParcel(Parcel in) {
+            return new Vehicle(in);
+        }
+
+        @Override
+        public Vehicle[] newArray(int size) {
+            return new Vehicle[size];
+        }
+    };
 
     public String getModel() {
         return model;
@@ -79,5 +103,20 @@ public class Vehicle {
                 ", basePrice=" + basePrice +
                 ", open=" + open +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(owner);
+        dest.writeString(model);
+        dest.writeInt(maxCapacity);
+        dest.writeString(id);
+        dest.writeDouble(basePrice);
+        dest.writeByte((byte) (open ? 1 : 0));
     }
 }

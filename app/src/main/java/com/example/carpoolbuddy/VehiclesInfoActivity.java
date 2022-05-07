@@ -87,6 +87,7 @@ public class VehiclesInfoActivity extends AppCompatActivity implements MyAdapter
     public void onVehicleClick(int position) {
         vehiclesList.get(position);
         Intent intent = new Intent(this, VehicleProfileActivity.class);
+        intent.putExtra("selected vehicle", vehiclesList.get(position));
         startActivity(intent);
     }
 }
