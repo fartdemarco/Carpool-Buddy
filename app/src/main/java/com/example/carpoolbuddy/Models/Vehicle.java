@@ -35,6 +35,7 @@ public class Vehicle implements Parcelable {
         id = in.readString();
         basePrice = in.readDouble();
         open = in.readByte() != 0;
+        reservedUids = in.createStringArrayList();
     }
 
     public static final Creator<Vehicle> CREATOR = new Creator<Vehicle>() {
@@ -134,5 +135,6 @@ public class Vehicle implements Parcelable {
         dest.writeString(id);
         dest.writeDouble(basePrice);
         dest.writeByte((byte) (open ? 1 : 0));
+        dest.writeStringList(reservedUids);
     }
 }

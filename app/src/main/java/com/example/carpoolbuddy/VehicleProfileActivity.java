@@ -65,7 +65,7 @@ public class VehicleProfileActivity extends AppCompatActivity implements View.On
 
         // update capacity
         firestore.collection("vehicles").document(vehicle.getId())
-                .update("remainingCapacity", vehicle.getMaxCapacity() - 1);
+                .update("maxCapacity", vehicle.getMaxCapacity() - 1);
 
         // add user's uid to the list of reservedUids
         vehicle.addReservedUid(mAuth.getUid());
