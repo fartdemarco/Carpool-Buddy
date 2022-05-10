@@ -3,6 +3,8 @@ package com.example.carpoolbuddy.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 public class Vehicle implements Parcelable {
     private String owner;
     private String model;
@@ -10,6 +12,7 @@ public class Vehicle implements Parcelable {
     private String id;
     private double basePrice;
     private boolean open;
+    private ArrayList<String> reservedUids;
 
     public Vehicle() {
 
@@ -22,6 +25,7 @@ public class Vehicle implements Parcelable {
         this.id = id;
         this.basePrice = basePrice;
         open = true;
+        reservedUids = new ArrayList<>();
     }
 
     protected Vehicle(Parcel in) {
@@ -73,7 +77,19 @@ public class Vehicle implements Parcelable {
         return basePrice;
     }
 
-    public void setRating(int basePrice) {
+    public ArrayList<String> getReservedUids() {
+        return reservedUids;
+    }
+
+    public void setReservedUids(ArrayList<String> reservedUids) {
+        this.reservedUids = reservedUids;
+    }
+
+    public void addReservedUid(String string) {
+        this.reservedUids.add(string);
+    }
+
+    public void setBasePrice(int basePrice) {
         this.basePrice = basePrice;
     }
 

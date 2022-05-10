@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewOwner" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/bookRideButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
