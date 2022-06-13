@@ -11,6 +11,7 @@ public class Vehicle implements Parcelable {
     private int maxCapacity;
     private String id;
     private double basePrice;
+    private String type;
     private boolean open;
     private ArrayList<String> reservedUids;
 
@@ -18,12 +19,13 @@ public class Vehicle implements Parcelable {
 
     }
 
-    public Vehicle(String owner, String model, int maxCapacity, String id, double basePrice) {
+    public Vehicle(String owner, String model, int maxCapacity, String id, double basePrice, String type) {
         this.owner = owner;
         this.model = model;
         this.maxCapacity = maxCapacity;
         this.id = id;
         this.basePrice = basePrice;
+        this.type = type;
         open = true;
         reservedUids = new ArrayList<>();
     }
@@ -34,6 +36,7 @@ public class Vehicle implements Parcelable {
         maxCapacity = in.readInt();
         id = in.readString();
         basePrice = in.readDouble();
+        type = in.readString();
         open = in.readByte() != 0;
         reservedUids = in.createStringArrayList();
     }
@@ -110,6 +113,14 @@ public class Vehicle implements Parcelable {
         this.open = open;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -134,6 +145,7 @@ public class Vehicle implements Parcelable {
         dest.writeInt(maxCapacity);
         dest.writeString(id);
         dest.writeDouble(basePrice);
+        dest.writeString(type);
         dest.writeByte((byte) (open ? 1 : 0));
         dest.writeStringList(reservedUids);
     }

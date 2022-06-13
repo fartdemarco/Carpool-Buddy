@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.carpoolbuddy.Models.Vehicle;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +29,9 @@ public class VehiclesInfoActivity extends AppCompatActivity implements MyAdapter
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
     private RecyclerView recyclerView;
+    private Spinner userRoleSpinner;
+    private String selectedRole;
+
 
     //added for testing
     private ArrayList<Vehicle> vehiclesList;
@@ -40,15 +46,58 @@ public class VehiclesInfoActivity extends AppCompatActivity implements MyAdapter
         firestore = FirebaseFirestore.getInstance();
         recyclerView = findViewById(R.id.RecyclerView);
 
-        vehiclesList = new ArrayList<Vehicle>();
-        testDB();
+        userRoleSpinner = findViewById(R.id.spinner2);
 
+
+        vehiclesList = new ArrayList<Vehicle>();
+
+        setupSpinner();
 
 
         //added for testing
     }
 
-    public void testDB() {
+    private void setupSpinner() {
+        String[] vehicleTypes = {"All", "Car", "Electric Car", "Motorbike"};
+        // add user types to spinner
+        ArrayAdapter<String> langArrAdapter = new ArrayAdapter<String>(VehiclesInfoActivity.this,
+                android.R.layout.simple_spinner_item, vehicleTypes);
+        langArrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        userRoleSpinner.setAdapter(langArrAdapter);
+
+        //triggered whenever user selects something different
+        userRoleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                selectedRole = parent.getItemAtPosition(position).toString();
+                addFields();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
+    public void addFields() {
+        recyclerView.removeAllViewsInLayout();
+        if(selectedRole.equals("All")) {
+            testDB("All");
+        }
+        if(selectedRole.equals("Car")) {
+            testDB("Car");
+        }
+        if(selectedRole.equals("Electric Car")) {
+            testDB("Electric Car");
+        }
+        if(selectedRole.equals("Motorbike")) {
+            testDB("Motorbike");
+        }
+    }
+
+    public void testDB(String type) {
         vehiclesList.clear();
         TaskCompletionSource<String> getAllRidesTask = new TaskCompletionSource<>();
         firestore.collection(Constants.VEHICLE_COLLECTION).whereEqualTo("open", true)
@@ -57,7 +106,14 @@ public class VehiclesInfoActivity extends AppCompatActivity implements MyAdapter
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful() && task.getResult() != null) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        vehiclesList.add(document.toObject(Vehicle.class));
+                        if(selectedRole.equals("All")) {
+                            vehiclesList.add(document.toObject(Vehicle.class));
+                        }
+                        else if(selectedRole.equals(type)){
+                            if(document.toObject(Vehicle.class).getType().equals(type)) {
+                                vehiclesList.add(document.toObject(Vehicle.class));
+                            }
+                        }
                     }
                     getAllRidesTask.setResult(null);
                 }

@@ -5,7 +5,7 @@ public class Car extends Vehicle {
 
     }
 
-    public Car(String owner, String model, int capacity, String id, double basePrice) {
-        super(owner, model, capacity, id, basePrice);
+    public Car(String owner, String model, int capacity, String id, double basePrice, String type) {
+        super(owner, model, capacity, id, basePrice, type);
     }
 }

@@ -19,12 +19,13 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutCreateVehicle"
-        android:layout_width="409dp"
-        android:layout_height="631dp"
-        android:layout_marginTop="110dp"
+        android:layout_width="367dp"
+        android:layout_height="622dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 

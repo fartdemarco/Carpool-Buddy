@@ -110,14 +110,14 @@ public class AddVehicleActivity extends AppCompatActivity {
         //check which type of vehicle was created
         if(selectedType.equals(Constants.CAR)) {
             int capacityInt = Integer.parseInt(capacityField.getText().toString());
-            newVehicle = new Car(ownerString, modelString, capacityInt, vehicleId, basePriceDouble);
+            newVehicle = new Car(ownerString, modelString, capacityInt, vehicleId, basePriceDouble, "Car");
         }
         else if(selectedType.equals(Constants.ELECTRIC_CAR)) {
             int capacityInt = Integer.parseInt(capacityField.getText().toString());
-            newVehicle = new ElectricCar(ownerString, modelString, capacityInt, vehicleId, basePriceDouble);
+            newVehicle = new ElectricCar(ownerString, modelString, capacityInt, vehicleId, basePriceDouble, "Electric Car");
         }
         else if(selectedType.equals(Constants.MOTOR_BIKE)) {
-            newVehicle = new Motorbike(ownerString, modelString, 2, vehicleId, basePriceDouble);
+            newVehicle = new Motorbike(ownerString, modelString, 2, vehicleId, basePriceDouble, "Motorbike");
         }
 
         //add the new vehicle to the database

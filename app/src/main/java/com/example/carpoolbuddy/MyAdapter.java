@@ -40,10 +40,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>  {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.ownerText.setText(vehicleList.get(position).getOwner());
-        holder.modelText.setText(vehicleList.get(position).getModel());
-        holder.capacityText.setText(String.valueOf(vehicleList.get(position).getMaxCapacity()));
-        holder.priceText.setText(String.valueOf(vehicleList.get(position).getBasePrice()));
+        holder.ownerText.setText("Owner: "+vehicleList.get(position).getOwner());
+        holder.modelText.setText("Model: "+vehicleList.get(position).getModel());
+        holder.capacityText.setText("Capacity: "+String.valueOf(vehicleList.get(position).getMaxCapacity()));
+        holder.priceText.setText("Price: "+String.valueOf(vehicleList.get(position).getBasePrice()));
     }
 
     @Override
