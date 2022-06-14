@@ -118,42 +118,48 @@ public class SignUpActivity extends AppCompatActivity {
         String nameString = nameField.getText().toString();
         String emailString = emailField.getText().toString();
         String passwordString = passwordField.getText().toString();
-        mAuth.createUserWithEmailAndPassword(emailString, passwordString)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            Log.d("SIGN UP", "successfully signed up the user");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+
+        if(emailString.endsWith("fis.edu")) {
+            mAuth.createUserWithEmailAndPassword(emailString, passwordString)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Log.d("SIGN UP", "successfully signed up the user");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                updateUI(user);
+                            } else {
+                                Log.d("SIGN UP", "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(SignUpActivity.this, "Sign up failed", Toast.LENGTH_LONG).show();
+                                updateUI(null);
+                            }
                         }
-                        else {
-                            Log.d("SIGN UP", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUpActivity.this,"Sign up failed", Toast.LENGTH_LONG).show();
-                            updateUI(null);
-                        }
-                    }
-                });
-        if(selectedRole.equals("Alumni")) {
-            int gradYearInt = Integer.parseInt(gradYearField.getText().toString());
-            Alumni newUser = new Alumni(uid, nameString, emailString, gradYearInt);
-            firestore.collection("people/peopledoc/alumni").document(uid).set(newUser);
+                    });
+            if (selectedRole.equals("Alumni")) {
+                int gradYearInt = Integer.parseInt(gradYearField.getText().toString());
+                Alumni newUser = new Alumni(uid, nameString, emailString, gradYearInt);
+                firestore.collection("people/peopledoc/alumni").document(uid).set(newUser);
+            }
+            if (selectedRole.equals("Student")) {
+                int gradeLevelInt = Integer.parseInt(gradeLevelField.getText().toString());
+                Student newUser = new Student(uid, nameString, emailString, gradeLevelInt);
+                firestore.collection("people/peopledoc/student").document(uid).set(newUser);
+            }
+            if (selectedRole.equals("Teacher")) {
+                String subject = subjectField.getText().toString();
+                Teacher newUser = new Teacher(uid, nameString, emailString, subject);
+                firestore.collection("people/peopledoc/teacher").document(uid).set(newUser);
+            }
+            if (selectedRole.equals("Parent")) {
+                Parent newUser = new Parent(uid, nameString, emailString);
+                firestore.collection("people/peopledoc/alumni").document(uid).set(newUser);
+            }
+            updateUI(mAuth.getCurrentUser());
         }
-        if(selectedRole.equals("Student")) {
-            int gradeLevelInt = Integer.parseInt(gradeLevelField.getText().toString());
-            Student newUser = new Student(uid, nameString, emailString, gradeLevelInt);
-            firestore.collection("people/peopledoc/student").document(uid).set(newUser);
+        else {
+            System.out.println("Needs to be FIS member");
+            Toast.makeText(SignUpActivity.this, "Sign up failed", Toast.LENGTH_LONG).show();
         }
-        if(selectedRole.equals("Teacher")) {
-            String subject = subjectField.getText().toString();
-            Teacher newUser = new Teacher(uid, nameString, emailString, subject);
-            firestore.collection("people/peopledoc/teacher").document(uid).set(newUser);
-        }
-        if(selectedRole.equals("Parent")) {
-            Parent newUser = new Parent(uid, nameString, emailString);
-            firestore.collection("people/peopledoc/alumni").document(uid).set(newUser);
-        }
-        updateUI(mAuth.getCurrentUser());
     }
 
     public void updateUI(FirebaseUser currentUser) {
