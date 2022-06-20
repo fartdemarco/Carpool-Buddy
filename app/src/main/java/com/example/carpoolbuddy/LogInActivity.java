@@ -20,6 +20,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * Class for signing users in
+ * Authorized Users are directed to UserProfileActivity
+ * Incorrect Log in users receive error message
+ * Button for users without accounts directs them to SignUpActivity
+ *
+ * @author maria
+ * @version 1.0
+ */
 public class LogInActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private FirebaseAuth mAuth;
@@ -50,6 +59,11 @@ public class LogInActivity extends AppCompatActivity implements AdapterView.OnIt
 //        }
 //    }
 
+    /**
+     * Log in.
+     *
+     * @param v the v
+     */
     public void logIn(View v)
     {
         System.out.println("log in");
@@ -81,12 +95,22 @@ public class LogInActivity extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
+    /**
+     * Sign up 2.
+     *
+     * @param v the v
+     */
     public void signUp2(View v)
     {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Update ui.
+     *
+     * @param currentUser the current user
+     */
     public void updateUI(FirebaseUser currentUser)
     {
         if(currentUser != null)

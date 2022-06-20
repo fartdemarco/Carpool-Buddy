@@ -24,6 +24,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+/**
+ * The type Vehicles info activity.
+ */
 public class VehiclesInfoActivity extends AppCompatActivity implements MyAdapter.OnVehicleListener {
 
     private FirebaseAuth mAuth;
@@ -81,6 +84,9 @@ public class VehiclesInfoActivity extends AppCompatActivity implements MyAdapter
         });
     }
 
+    /**
+     * Add fields.
+     */
     public void addFields() {
         recyclerView.removeAllViewsInLayout();
         if(selectedRole.equals("All")) {
@@ -97,6 +103,11 @@ public class VehiclesInfoActivity extends AppCompatActivity implements MyAdapter
         }
     }
 
+    /**
+     * Test db.
+     *
+     * @param type the type
+     */
     public void testDB(String type) {
         vehiclesList.clear();
         TaskCompletionSource<String> getAllRidesTask = new TaskCompletionSource<>();
@@ -134,6 +145,11 @@ public class VehiclesInfoActivity extends AppCompatActivity implements MyAdapter
         });
     }
 
+    /**
+     * Goto user profile.
+     *
+     * @param v the v
+     */
     public void gotoUserProfile(View v) {
         Intent intent = new Intent(this, UserProfileActivity.class);
         startActivity(intent);

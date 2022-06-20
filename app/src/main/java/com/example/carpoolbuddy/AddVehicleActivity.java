@@ -21,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * The type Add vehicle activity.
+ */
 public class AddVehicleActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -72,6 +75,9 @@ public class AddVehicleActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Add fields.
+     */
     public void addFields() {
         commonFields();
         if(!selectedType.equals(Constants.MOTOR_BIKE)) {
@@ -81,6 +87,9 @@ public class AddVehicleActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Common fields.
+     */
     public void commonFields() {
         layout.removeAllViewsInLayout();
         ownerField = new EditText(this);
@@ -94,6 +103,11 @@ public class AddVehicleActivity extends AppCompatActivity {
         layout.addView(basePriceField);
     }
 
+    /**
+     * Create vehicle.
+     *
+     * @param v the v
+     */
     public void createVehicle(View v) {
         //generate + get new key
         DocumentReference newRideRef = firestore.collection(Constants.VEHICLE_COLLECTION).document();
@@ -127,14 +141,5 @@ public class AddVehicleActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void addVehicle(View v) {
-//        String owner = this.owner.getText().toString();
-//        String model = this.model.getText().toString();
-//        int capacity = parseInt(this.capacity.getText().toString());
-//        int rating = parseInt(this.rating.getText().toString());
-//
-//        Vehicle newVehicle = new Vehicle(model, capacity, owner, rating);
-//        firestore.collection("vehicles").document().set(newVehicle);
-//
-//    }
+
 }

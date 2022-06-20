@@ -18,11 +18,23 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+/**
+ * The type My adapter.
+ */
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>  {
 
+    /**
+     * The Vehicle list.
+     */
     ArrayList<Vehicle> vehicleList;
     private OnVehicleListener mOnVehicleListener;
 
+    /**
+     * Instantiates a new My adapter.
+     *
+     * @param data              the data
+     * @param onVehicleListener the on vehicle listener
+     */
     public MyAdapter(ArrayList<Vehicle> data, OnVehicleListener onVehicleListener) {
         vehicleList = data;
         this.mOnVehicleListener = onVehicleListener;
@@ -52,7 +64,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>  {
     }
 
 
+    /**
+     * The interface On vehicle listener.
+     */
     public interface OnVehicleListener{
+        /**
+         * On vehicle click.
+         *
+         * @param position the position
+         */
         void onVehicleClick(int position);
     }
 }

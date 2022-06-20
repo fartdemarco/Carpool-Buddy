@@ -11,9 +11,18 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * The type User profile activity.
+ */
 public class UserProfileActivity extends AppCompatActivity {
 
+    /**
+     * The M auth.
+     */
     FirebaseAuth mAuth;
+    /**
+     * The M user.
+     */
     FirebaseUser mUser;
 
     private TextView welcome;
@@ -31,6 +40,11 @@ public class UserProfileActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Sign out.
+     *
+     * @param v the v
+     */
     public void signOut(View v) {
         mAuth.signOut();
         Intent intent = new Intent(this, LogInActivity.class);
@@ -38,12 +52,22 @@ public class UserProfileActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * See vehicles.
+     *
+     * @param v the v
+     */
     public void seeVehicles(View v) {
         Intent intent = new Intent(this, VehiclesInfoActivity.class);
         startActivity(intent);
         finish();
     }
 
+    /**
+     * Add vehicles.
+     *
+     * @param v the v
+     */
     public void addVehicles(View v) {
         Intent intent = new Intent(this, AddVehicleActivity.class);
         startActivity(intent);

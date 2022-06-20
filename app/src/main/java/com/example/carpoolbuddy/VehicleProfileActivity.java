@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * The type Vehicle profile activity.
+ */
 public class VehicleProfileActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "Vehicle Activity";
 
@@ -56,6 +59,9 @@ public class VehicleProfileActivity extends AppCompatActivity implements View.On
 
     }
 
+    /**
+     * Book a ride.
+     */
     public void bookARide()
     {//close vehicle if user took last seat available
         if(vehicle.getMaxCapacity() == 1) {

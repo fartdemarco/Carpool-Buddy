@@ -28,6 +28,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * In this activity users are able to sign up.
+ * Succesful sign up sends user to UserProfileActivity
+ */
 public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
